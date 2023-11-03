@@ -20,9 +20,9 @@ cout << "The averge is:" << sum/(sizeof(arr)/sizeof(arr[0])) << endl;
 
 // 2)
 
-int a[5][5] = {{1,2,3,4,5}, {6,7,8,9,10}};
+int a[5][5] = {{1,2,3,4,5}, {6,7,8,9,10}, {11, 12, 13, 14, 15}, {16, 17, 18, 19, 20}, {21, 22, 23, 24,25}};
 
-for (int i = 0; i < 2; i++)
+for (int i = 0; i < 5; i++)
     for (int j = 0; j < 5; j++)
         cout << "a["<< i <<"]"<<"["<<j<<"]   "<< a[i][j] << endl;
 
@@ -31,7 +31,7 @@ for (int i = 0; i < 2; i++)
 int as = 0;
 string text;
 cout << "enter a text:" << endl;
-cin >> text;
+getline(cin, text);
 
 
 for (int k = 0; k < text.length(); k++ )
@@ -43,3 +43,5 @@ cout << as;
 return 0;
 
 }
+
+
