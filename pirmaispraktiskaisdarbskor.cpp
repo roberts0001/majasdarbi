@@ -8,9 +8,9 @@ using namespace std;
 
 int main()
 {
-    string virkne = "Programmas ir jaraksta cilvekiem, kas tas lasis";
-    int izvele;
-    bool strada = true;
+    string text = "Programmas ir jaraksta cilvekiem, kas tas lasis";
+    int choice;
+    bool works = true;
 
     cout << "Jusu izveles ir:" << endl << "1: Ievadiet jaunu tekstu (parastie burti)"
     << endl << "2: Uzziet vai ievadita teksta garums ir para vai nepara skaitlis"
@@ -19,25 +19,24 @@ int main()
     << endl << "5. Izvada virkni no otra gala (reversa)"
     << endl << "6. Beigt darbibu" << endl;
 
-
-    while (strada) {
+    while (works) {
         cout << "Ievadiet izveli starp 1-6: ";
-        cin >> izvele;
-        int fakt = 1;
-        int skaitl = 0;
-        string jaunavirkne = virkne;
+        cin >> choice;
+        int fact = 1;
+        int numb = 0;
+        string newText = text;
 
-        switch (izvele)
+        switch (choice)
         {
             case 1:
                 cin.ignore();
                 cout << "Ievadiet jauno virkni" << endl;
-                getline(cin, virkne);
-                cout << endl <<  "Jusu virkne tagad ir " << virkne << endl;   
+                getline(cin, text);
+                cout << endl <<  "Jusu virkne tagad ir " << text << endl;   
                 break;
             
             case 2:
-                if (virkne.length() % 2 == 0) {
+                if (text.length() % 2 == 0) {
                     cout << "Para" << endl;
                 }
                 else {
@@ -46,31 +45,29 @@ int main()
                 break;
 
             case 3:
-                for (int i = 1; i < virkne.length(); i++) {
-                    skaitl += i;
+                for (int i = 1; i < text.length(); i++) {
+                    numb += i;
                 }
-                cout << skaitl << endl;
+                cout << numb << endl;
                 break;
             
             case 4:
-                for (int i = 1; i <= virkne.length(); i++) {
-                    fakt = fakt * i;
+                for (int i = 1; i <= text.length(); i++) {
+                    fact = fact * i;
                 }
-                cout << fakt << endl; 
+                cout << fact << endl; 
                 break;
 
             case 5:
-                reverse(jaunavirkne.begin(), jaunavirkne.end());
-                cout << jaunavirkne << endl;
+                reverse(newText.begin(), newText.end());
+                cout << newText << endl;
                 break;
 
             case 6:
                 cout << "Darbiba ir beigta" << endl;
-                strada = false;
+                works = false;
                 break; 
-
         }
     }
-
     return 0;
 }
