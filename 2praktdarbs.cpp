@@ -9,42 +9,7 @@
 
 using namespace std;
 
-enum numurins {   //enum ar izvelem
-        IEVADIT = 1,
-        RINDA = 2,
-        STEKS = 3,
-        KONTEINERIS = 4,
-        IZVADIT = 5,
-        BEIGT = 6,
-    };
-
-numurins mainit (int x) { //funkcija mainis ievaditu izveli par numurinu
-    switch (x) {
-        case 1:
-            return IEVADIT;
-            break;
-        case 2:
-            return RINDA;
-            break;
-        case 3:
-            return STEKS;
-            break;
-        case 4: 
-            return KONTEINERIS;
-            break;
-        case 5:
-            return IZVADIT;
-            break;
-        case 6:
-            return BEIGT;
-            break;
-        default:
-            cout << "Nepareiza izvele. Izvelaties skaitlu 1-6" << endl;
-            break;
-    }
-}
-
-void ievadisana(int y, vector<int>& b) {
+void entering(int y, vector<int>& b) {
     int a;
     for (int i = 1; i <= y; i++) {
         cout << "Ievadiet skaitlu kuru jums gribetos pievienot:" << endl;
@@ -53,74 +18,70 @@ void ievadisana(int y, vector<int>& b) {
     }
 }
 
-void vektorsrinda (vector<int>& c) {
-
-    queue<int> pirmarinda;
-
-    for (int i : c) {
-        pirmarinda.push(i);
-    }
-
-    while (!pirmarinda.empty()) {
-        cout << "No rindas:" << pirmarinda.front() << endl;
-        pirmarinda.pop();
-    }
-
-
-
-}
-
-void vektorssteks (vector<int>& c) {
-
-    stack<int> pirmaissteks;
+void vectorToQueue (vector<int>& c) {
+    queue<int> firstQueue;
 
     for (int i : c) {
-        pirmaissteks.push(i);
+        firstQueue.push(i);
     }
 
-    while (!pirmaissteks.empty()) {
-        cout << "No steka:" << pirmaissteks.top() << endl;
-        pirmaissteks.pop();
+    while (!firstQueue.empty()) {
+        cout << "No rindas:" << firstQueue.front() << endl;
+        firstQueue.pop();
     }
-
-
-
 }
 
-void vektorsdeque(vector<int>& c) {
-    deque<int> pirmaisdeque(c.begin(), c.end());
+void vectorToStack (vector<int>& c) {
+    stack<int> firstStack;
 
-    pirmaisdeque.pop_front();
+    for (int i : c) {
+        firstStack.push(i);
+    }
 
-    pirmaisdeque.push_back(c.front());
+    while (!firstStack.empty()) {
+        cout << "No steka:" << firstStack.top() << endl;
+        firstStack.pop();
+    }
+}
 
-    for(int i : pirmaisdeque) {
+void vectorToDeque(vector<int>& c) {
+    deque<int> firstDeque(c.begin(), c.end());
+
+    firstDeque.pop_front();
+
+    firstDeque.push_back(c.front());
+
+    for(int i : firstDeque) {
         cout << i << " ";
     }
     cout << endl;
 }
 
-void izvadisana (vector<int>& c) {
+void printing (vector<int>& c) {
     for (int i = 0; i < c.size(); i++) {
         cout << c[i] << " ";
-        }
-        cout << endl;
+    }
+    cout << endl;
 }
 
-
-
-
 int main() {
-    
-    
-    numurins izvele;
-    int numizvele;
-    bool beigt = true;
-    int reizes;
+    enum numbers {   //enum ar izvelem
+        ENTER = 1,
+        QUEUE = 2,
+        STACK = 3,
+        DEQUE = 4,
+        PRINT = 5,
+        STOP = 6,
+    };
 
-    vector<int> pirmais = {4, 5, 6, 7, 8};
+    numbers choice; 
+    int numChoice;
+    bool working = true;
+    int times;
 
-    while (beigt) {
+    vector<int> myVector = {4, 5, 6, 7, 8};
+
+    while (working) {
 
         cout << "Izvele:" << endl << 
         "1: Ievadit skaitlus"  << endl <<
@@ -130,48 +91,44 @@ int main() {
         "5: Izvada skaitlu virkni" << endl <<
         "6: Beigt darbibu" << endl;
 
-
         do {
                 cout << "Ludzu ievadiet savu izveli (1-6):" << endl;
-                cin >> numizvele;
+                cin >> numChoice;
 
                 if (cin.fail()) {
 
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
-            } while (numizvele < 1 || numizvele > 6);
+            } while (numChoice < 1 || numChoice > 6);
         
-        izvele = mainit (numizvele); //maina izveli par numurinu
+        choice = static_cast<numbers>(numChoice); 
 
-        
-        switch (izvele) {
+        switch (choice) {
 
-            case IEVADIT:
+            case ENTER:
                 cout << "Cik skaitlus gribat pievienot vektoram?";
-                cin >> reizes;
-                ievadisana(reizes, pirmais);
+                cin >> times;
+                entering(times, myVector);
                 cout << endl;
                 break;
-            case RINDA:
-                vektorsrinda(pirmais);
+            case QUEUE:
+                vectorToQueue(myVector);
                 break;
-            case STEKS:
-                vektorssteks (pirmais);
+            case STACK:
+                vectorToStack (myVector);
                 break;
-            case KONTEINERIS:
-                vektorsdeque(pirmais);
+            case DEQUE:
+                vectorToDeque(myVector);
                 break;
-            case IZVADIT:
-                izvadisana(pirmais);
+            case PRINT:
+                printing(myVector);
                 break;
-            case BEIGT:
-                beigt = false;
+            case STOP:
+                working = false;
                 break;
-
         }
-
     }
-
     return 0;
 }
+
