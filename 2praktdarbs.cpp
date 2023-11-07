@@ -108,6 +108,8 @@ void izvadisana (vector<int>& c) {
 }
 
 
+
+
 int main() {
     
     
@@ -128,9 +130,17 @@ int main() {
         "5: Izvada skaitlu virkni" << endl <<
         "6: Beigt darbibu" << endl;
 
-        cout << "Ludzu ievadiet savu izveli (1-6):" << endl;
-        cin >> numizvele;
 
+        do {
+                cout << "Ludzu ievadiet savu izveli (1-6):" << endl;
+                cin >> numizvele;
+
+                if (cin.fail()) {
+
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                }
+            } while (numizvele < 1 || numizvele > 6);
         
         izvele = mainit (numizvele); //maina izveli par numurinu
 
@@ -158,6 +168,7 @@ int main() {
             case BEIGT:
                 beigt = false;
                 break;
+
         }
 
     }
