@@ -54,7 +54,14 @@ int main() {
     recursiveSum();
 
     //3
+    cout << "Izprinte skaitli:" << endl;
+    Print(5);
+    cout << "Izprinte virkni:" << endl;
+    Print("Viens teikums");
+    cout << "Izprinte decimalu:" << endl;
     Print(1.5);
+    cout << "Izprinte simbolu:" << endl;
+    Print('S');
 
     return 0;
 }
